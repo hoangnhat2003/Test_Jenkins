@@ -1,7 +1,9 @@
-FROM openjdk:8
+FROM openjdk:8-jdk-alpine
 
-ADD target/javaexpress-springboot-docker.jar javaexpress-springboot-docker.jar
+ARG JAR_FILE=target/javaexpress-springboot-docker.jar
 
-EXPOSE 8080
+RUN mkdir /opt/testjenkins
 
-ENTRYPOINT ["java","-jar","javaexpress-springboot-docker.jar"]
+COPY ${JAR_FILE} /opt/testjenkins/javaexpress-springboot-docker.jar
+
+ENTRYPOINT ["java","-jar","/opt/testjenkins/javaexpress-springboot-docker.jar"]
